@@ -1,0 +1,108 @@
+29.09.2025 10:01:08 :Hello file!
+29.09.2025 10:01:29 - Start Server
+29.09.2025 14:51:53 - Start Server
+01.10.2025 10:59:04 - Start Server
+01.10.2025 10:59:54 - Start Server
+01.10.2025 11:00:49 - Start Server
+02.10.2025 15:40:14 - Start Server
+02.10.2025 15:51:39 - Start Server
+02.10.2025 15:51:40 - GetMessage
+02.10.2025 15:51:40 - GetMessage
+02.10.2025 16:02:54 - Start Server
+02.10.2025 16:06:01 - Start Server
+02.10.2025 16:06:46 - Start Server
+02.10.2025 16:09:12 - Start Server
+02.10.2025 16:09:33 - Start Server
+02.10.2025 16:10:05 - Start Server
+02.10.2025 16:10:07 - Start Server
+02.10.2025 16:10:45 - Start Server
+02.10.2025 16:11:40 - Start Server
+02.10.2025 16:12:39 - Start Server
+02.10.2025 16:13:23 - Start Server
+02.10.2025 16:14:41 - Start Server
+03.10.2025 21:28:19 - Start Server
+03.10.2025 21:28:21 - Button wurde geklickt. Hallo! Der Server hat deine Anfrage um 21:28:21 erhalten.
+06.10.2025 14:38:49 - Start Server
+06.10.2025 14:39:01 - Button wurde geklickt. Hallo! Der Server hat deine Anfrage um 14:39:01 erhalten.
+06.10.2025 14:56:08 - Start Server
+06.10.2025 14:57:13 - Start Server
+06.10.2025 14:58:49 - Start Server
+06.10.2025 15:05:03 - Start Server
+06.10.2025 15:06:09 - Start Server
+06.10.2025 15:08:23 - Start Server
+06.10.2025 15:08:58 - Start Server
+06.10.2025 15:09:27 - Start Server
+06.10.2025 15:09:51 - Start Server
+06.10.2025 15:09:53 - Button wurde geklickt. Hallo! Der Server hat deine Anfrage um 15:09:53 erhalten.
+06.10.2025 15:19:32 - Start Server
+06.10.2025 15:19:45 - Start Server
+06.10.2025 15:19:47 - Button wurde geklickt. Hallo! Der Server hat deine Anfrage um 15:19:47 erhalten.
+06.10.2025 15:21:24 - Start Server
+06.10.2025 15:21:26 - Button wurde geklickt. Hallo! Der Server hat deine Anfrage um 15:21:26 erhalten.
+06.10.2025 15:21:36 - Start Server
+06.10.2025 15:41:25 - Start Server
+06.10.2025 15:42:10 - Start Server
+06.10.2025 15:43:30 - Start Server
+06.10.2025 15:43:44 - Button wurde geklickt. Hallo! Der Server hat deine Anfrage um 15:43:44 erhalten.
+06.10.2025 16:10:15 - Start Server
+06.10.2025 16:10:18 - Button wurde geklickt. Hallo! Der Server hat deine Anfrage um 16:10:18 erhalten.
+07.10.2025 15:22:40 - Start Server
+07.10.2025 15:24:15 - Start Server
+07.10.2025 15:24:33 - Button wurde geklickt. Hallo! Der Server hat deine Anfrage um 15:24:33 erhalten.
+07.10.2025 15:27:23 - Start Server
+07.10.2025 15:27:34 - Button wurde geklickt. Hallo! Der Server hat deine Anfrage um 15:27:34 erhalten.
+07.10.2025 15:52:14 - Start Server
+07.10.2025 15:52:17 - Button wurde geklickt. Hallo! Der Server hat deine Anfrage um 15:52:17 erhalten.
+07.10.2025 16:03:28 - Start Server
+07.10.2025 16:03:30 - Button wurde geklickt. Hallo! Der Server hat deine Anfrage um 16:03:30 erhalten.
+07.10.2025 16:12:03 - Start Server
+07.10.2025 16:12:56 - Start Server
+07.10.2025 16:14:24 - Start Server
+07.10.2025 16:16:45 - Start Server
+07.10.2025 16:18:26 - Start Server
+07.10.2025 16:21:48 - Start Server
+07.10.2025 16:22:35 - Button wurde geklickt. Hallo! Der Server hat deine Anfrage um 16:22:35 erhalten.
+08.10.2025 15:30:29 - Start Server
+08.10.2025 15:31:13 - Button wurde geklickt. Hallo! Der Server hat deine Anfrage um 15:31:13 erhalten.
+06.11.2025 13:27:19 - Start Server
+11.11.2025 15:13:50 - Start Server
+11.11.2025 15:15:02 - Button wurde geklickt. Hallo! Der Server hat deine Anfrage um 15:15:02 erhalten.
+11.11.2025 15:19:34 - Start Server
+11.11.2025 15:19:56 - Datensatz geändert von ID: 59 | NAME: von SFung zur SFung
+11.11.2025 15:20:29 - Start Server
+11.11.2025 15:20:36 - Datensatz geändert von ID: 59 | NAME: von Fung zur Fung
+11.11.2025 15:21:20 - Start Server
+11.11.2025 15:21:29 - Datensatz geändert von ID: 59 | NAME: von Fung zur VFung
+11.11.2025 15:32:44 - Start Server
+11.11.2025 15:32:53 - Datensatz geändert von ID: 1 | AGE: von 43 zur 44
+11.11.2025 15:33:06 - Datensatz geändert von ID: 2 | NAME: von Allen nach Allens
+11.11.2025 15:33:24 - Datensatz geändert von ID: 2 | ADDRESS: von Texas zur New York
+11.11.2025 15:33:33 - Datensatz geändert von ID: 2 | SALARY: von 15000 nach 16000
+11.11.2025 15:33:53 - Datensatz geändert von ID: 17 | NAME: von James nach James Bond
+11.11.2025 15:33:53 - Datensatz geändert von ID: 17 | SALARY: von 10000 nach 100000
+11.11.2025 15:33:53 - Datensatz geändert von ID: 17 | ADDRESS: von Houston zur London
+11.11.2025 15:33:53 - Datensatz geändert von ID: 17 | AGE: von 24 zur 33
+13.11.2025 08:18:55 - Start Server
+13.11.2025 08:19:04 - Datensatz geändert von ID: 59 | NAME: von VFung nach Fung
+13.11.2025 08:23:07 - Start Server
+13.11.2025 08:34:24 - Start Server
+13.11.2025 08:34:43 - Datensatz mit ID: 61 | NAME: Hugo | SALARY: 50000 | ADDRESS: Berlin erzeugt
+13.11.2025 08:41:20 - Start Server
+13.11.2025 08:44:29 - Start Server
+13.11.2025 08:45:03 - Datensatz geändert von ID: 61 | NAME: von Hugo1 nach Hugo
+13.11.2025 08:45:03 - Datensatz geändert von ID: 61 | SALARY: von 160001 nach 16000
+13.11.2025 08:45:03 - Datensatz geändert von ID: 61 | ADDRESS: von Berlin1 nach Berlin
+13.11.2025 08:45:03 - Datensatz geändert von ID: 61 | AGE: von 0 nach 50
+13.11.2025 08:45:45 - Start Server
+13.11.2025 08:45:57 - Datensatz geändert von ID: 60 | SALARY: von 25000 nach 35000
+13.11.2025 08:45:57 - Datensatz geändert von ID: 60 | AGE: von 25 nach 26
+13.11.2025 08:46:01 - Datensatz mit der ID: 61 | mit der Name: Hugo ist wird
+26.11.2025 10:35:49 - Start Server
+26.11.2025 10:47:25 - Start Server
+26.11.2025 10:48:30 - Start Server
+26.11.2025 10:51:42 - Start Server
+26.11.2025 10:51:54 - Start Server
+26.11.2025 10:53:40 - Start Server
+26.11.2025 10:54:46 - Start Server
+26.11.2025 10:54:59 - Datensatz geändert von ID: 60 | AGE: von 26 nach 27
+26.11.2025 10:56:19 - Start Server

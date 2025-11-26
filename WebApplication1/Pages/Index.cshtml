@@ -1,0 +1,335 @@
+﻿@page
+@model WebApp.Web
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@* Anti-Forgery Token *@
+@Html.AntiForgeryToken()
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <button id="callButton" class="btn btn-primary">Funktion aufrufen</button>
+    <p id="resultText" class="mt-3 text-success"></p>
+
+    <hr />
+    <h2>Company Table (CRUD)</h2>
+
+    <button class="btn btn-success mb-3" id="btnAdd">+ New Company</button>
+
+    <table class="table table-bordered table-striped" id="companyTable">
+        <thead>
+            <tr>
+                <th data-type="number">ID</th>
+                <th data-type="string">NAME</th>
+                <th data-type="number">AGE</th>
+                <th data-type="string">ADDRESS</th>
+                <th data-type="number">SALARY</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <th><input class="form-control form-control-sm" placeholder="Filter ID" /></th>
+                <th><input class="form-control form-control-sm" placeholder="Filter Name" /></th>
+                <th><input class="form-control form-control-sm" placeholder="Filter Age" /></th>
+                <th><input class="form-control form-control-sm" placeholder="Filter Address" /></th>
+                <th><input class="form-control form-control-sm" placeholder="Filter Salary" /></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model.Companies)
+            {
+                 <tr data-id="@c.ID">
+                    <td>@c.ID</td>
+                    <td>@c.NAME</td>
+                    <td>@c.AGE</td>
+                    <td>@c.ADDRESS</td>
+                    <td>@c.SALARY</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary btnEdit">Edit</button>
+                        <button class="btn btn-sm btn-danger btnDelete">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Modal für Create / Edit -->
+    <div id="editModal" style="display:none; background:#fff; padding:20px; border:1px solid #ccc;">
+        <h4 id="modalTitle"></h4>
+        <input type="hidden" id="companyId" />
+        <div class="mb-2">
+            <input id="companyName" class="form-control" placeholder="Name" />
+        </div>
+        <div class="mb-2">
+            <input id="companyAge" class="form-control" type="number" placeholder="Age" />
+        </div>
+        <div class="mb-2">
+            <input id="companyAddress" class="form-control" placeholder="Address" />
+        </div>
+        <div class="mb-2">
+            <input id="companySalary" class="form-control" type="number" placeholder="Salary" />
+        </div>
+        <button id="btnSave" class="btn btn-success">Save</button>
+        <button id="btnCancel" class="btn btn-secondary">Cancel</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+
+            const table = document.getElementById("companyTable");
+            const tbody = table.querySelector("tbody");
+
+            const modal = document.getElementById("editModal");
+            const btnAdd = document.getElementById("btnAdd");
+            const btnSave = document.getElementById("btnSave");
+            const btnCancel = document.getElementById("btnCancel");
+
+            const inputId = document.getElementById("companyId");
+            const inputName = document.getElementById("companyName");
+            const inputAge = document.getElementById("companyAge");
+            const inputAddress = document.getElementById("companyAddress");
+            const inputSalary = document.getElementById("companySalary");
+            const modalTitle = document.getElementById("modalTitle");
+
+            // ---------- Filter ----------
+            const filters = table.querySelectorAll("thead tr:nth-child(2) input");
+            filters.forEach((input, colIndex) => {
+                input.addEventListener("keyup", () => {
+                    const filterValues = Array.from(filters).map(f => f.value.toLowerCase());
+                    const rows = tbody.querySelectorAll("tr");
+
+                    rows.forEach(row => {
+                        const cells = row.querySelectorAll("td");
+                        let visible = true;
+
+                        filterValues.forEach((filter, i) => {
+                            if (filter && !cells[i].textContent.toLowerCase().includes(filter)) {
+                                visible = false;
+                            }
+                        });
+
+                        row.style.display = visible ? "" : "none";
+                    });
+                });
+            });
+
+            // ---------- Sortierung ----------
+         // ---------- Verbesserte Sortierung (ersetze deinen bisherigen headers.forEach(...) Block) ----------
+        const headers = table.querySelectorAll("thead tr:first-child th");
+        let sortColumn = null, sortDirection = 'asc';
+
+        // Hilfsfunktionen
+        function parseNumberString(s) {
+            if (!s && s !== 0) return NaN;
+            // entferne Tausendertrennzeichen und ersetze Komma durch Punkt (DE/EN tolerant)
+            const cleaned = String(s).trim().replace(/\s/g, "").replace(/\./g, "").replace(',', '.');
+            const n = parseFloat(cleaned);
+            return isFinite(n) ? n : NaN;
+        }
+        function isNumericValue(s) {
+            return !isNaN(parseNumberString(s));
+        }
+        function getCellText(row, colIndex) {
+            const cell = row.children[colIndex];
+            return cell ? cell.textContent.trim() : "";
+        }
+
+        // UI: Pfeil-Icon setzen/entfernen
+        function clearSortIcons() {
+            headers.forEach(h => {
+                const icon = h.querySelector('.sort-icon');
+                if (icon) icon.remove();
+            });
+        }
+        function setSortIcon(header, dir) {
+            clearSortIcons();
+            const span = document.createElement('span');
+            span.className = 'sort-icon';
+            span.style.marginLeft = '6px';
+            span.textContent = dir === 'asc' ? '▲' : '▼';
+            header.appendChild(span);
+        }
+
+        // Klick-Handler
+        headers.forEach((header, i) => {
+            if (i === headers.length - 1) return; // Aktionen-Spalte überspringen (letzte Spalte)
+            header.style.cursor = 'pointer';
+            header.addEventListener('click', () => {
+                // toggle / set direction
+                if (sortColumn === i) {
+                    sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+                } else {
+                    sortColumn = i;
+                    sortDirection = 'asc';
+                }
+
+                const typeAttr = header.dataset.type ? header.dataset.type.toLowerCase() : 'auto';
+                const asc = sortDirection === 'asc';
+
+                // Rows array (alle Reihen)
+                const allRows = Array.from(tbody.querySelectorAll("tr"));
+
+                // Wir sortieren *sichtbare* Reihen zuerst, damit gefilterte (display:none) nicht stören.
+                // Alternative: sortiere alleRows (inkl. ausgeblendeter) — hier sortieren wir alle,
+                // behalten aber Display-Status bei (sichtbar wird sichtbar bleiben).
+                const rowsWithMeta = allRows.map(r => ({
+                    row: r,
+                    visible: window.getComputedStyle(r).display !== 'none'
+                }));
+
+                // stable sort: use index as tiebreaker
+                rowsWithMeta.forEach((m, idx) => m.index = idx);
+
+                rowsWithMeta.sort((a, b) => {
+                    const Araw = getCellText(a.row, sortColumn);
+                    const Braw = getCellText(b.row, sortColumn);
+
+                    // Decide type: if header forces number, use number; if 'auto' detect
+                    const useNumber = (typeAttr === 'number') ||
+                        (typeAttr === 'auto' && (isNumericValue(Araw) || isNumericValue(Braw)));
+
+                    if (useNumber) {
+                        const An = parseNumberString(Araw);
+                        const Bn = parseNumberString(Braw);
+                        const aIsNum = !isNaN(An);
+                        const bIsNum = !isNaN(Bn);
+
+                        // Nicht-numerische Werte sollen (aufsteigend) ans Ende
+                        if (!aIsNum && !bIsNum) {
+                            // fallback: text compare
+                            const cmp = Araw.localeCompare(Braw, undefined, { sensitivity: 'base', numeric: true });
+                            return asc ? cmp : -cmp;
+                        }
+                        if (!aIsNum) return 1; // a nach unten
+                        if (!bIsNum) return -1; // b nach unten
+
+                        if (An < Bn) return asc ? -1 : 1;
+                        if (An > Bn) return asc ? 1 : -1;
+                        // gleiche Zahl -> tiebreaker stable
+                    } else {
+                        // Textvergleich, case-insensitive, locale-aware
+                        const cmp = Araw.localeCompare(Braw, undefined, { sensitivity: 'base', numeric: true });
+                        if (cmp !== 0) return asc ? cmp : -cmp;
+                    }
+
+                    // Falls equal, keep original order for stability
+                    return a.index - b.index;
+                });
+
+                // Setze die sortierten Reihen zurück in tbody in der neuen Reihenfolge
+                // Wichtig: appendChild verschiebt vorhandene Nodes, kein klonen notwendig.
+                rowsWithMeta.forEach(m => tbody.appendChild(m.row));
+
+                // Icons aktualisieren
+                setSortIcon(header, sortDirection);
+            });
+        });
+
+
+            // ---------- Modal ----------
+            function openModal(title, company) {
+                modal.style.display = 'block';
+                modalTitle.textContent = title;
+                inputId.value = company?.ID || '';
+                inputName.value = company?.NAME || '';
+                inputAge.value = company?.AGE || '';
+                inputAddress.value = company?.ADDRESS || '';
+                inputSalary.value = company?.SALARY || '';
+            }
+
+            function closeModal() {
+                modal.style.display = 'none';
+            }
+
+            btnAdd.addEventListener("click", () => openModal("Add New Company"));
+            btnCancel.addEventListener("click", closeModal);
+
+            // ---------- Save (Create/Edit) ----------
+            btnSave.addEventListener("click", async () => {
+                const company = {
+                    ID: inputId.value || 0,
+                    NAME: inputName.value,
+                    AGE: parseInt(inputAge.value),
+                    ADDRESS: inputAddress.value,
+                    SALARY: parseInt(inputSalary.value)
+                };
+
+                const handler = company.ID ? "Edit" : "Create";
+
+                const response = await fetch(`?handler=${handler}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "RequestVerificationToken": token
+                    },
+                    body: JSON.stringify(company)
+                });
+
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert("Error while saving.");
+                }
+            });
+
+            // ---------- Edit/Delete ----------
+            tbody.addEventListener("click", e => {
+                if (e.target.classList.contains("btnEdit")) {
+                    const row = e.target.closest("tr");
+                    const company = {
+                        ID: row.dataset.id,
+                        NAME: row.children[1].textContent,
+                        AGE: row.children[2].textContent,
+                        ADDRESS: row.children[3].textContent,
+                        SALARY: row.children[4].textContent
+                    };
+                    openModal("Edit Company", company);
+                }
+
+                if (e.target.classList.contains("btnDelete")) {
+                    if (!confirm("Delete this entry?")) return;
+                    const id = parseInt(e.target.closest("tr").dataset.id);
+
+                    fetch(`?handler=Delete`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "RequestVerificationToken": token
+                        },
+                        body: JSON.stringify({ id: id })
+                    }).then(res => {
+                        if (res.ok) location.reload();
+                        else alert("Error deleting record.");
+                    });
+                }
+            });
+
+            // ---------- CallButton ----------
+            document.getElementById("callButton").addEventListener("click", async () => {
+                try {
+                    const response = await fetch("@Url.Page("Index", "CallFunction")", {
+                        method: "POST",
+                        headers: { "RequestVerificationToken": token }
+                    });
+
+                    if (response.ok) {
+                        const text = await response.text();
+                        document.getElementById("resultText").innerText = text;
+                    } else {
+                        document.getElementById("resultText").innerText = "Fehler beim Aufruf.";
+                    }
+                } catch (err) {
+                    console.error(err);
+                    document.getElementById("resultText").innerText = "Ein Fehler ist aufgetreten.";
+                }
+            });
+
+        }); // end DOMContentLoaded
+    </script>
+}
