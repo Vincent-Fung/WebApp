@@ -4,11 +4,14 @@
 This project is a web application designed to provide a comprehensive solution for users seeking an easy-to-use interface for managing various tasks efficiently. The application incorporates the latest technologies and best practices in web development to ensure a responsive and intuitive user experience.
 
 ## Features
-- **User Authentication**: Secure registration and login system to protect user data
-- **Responsive Design**: Optimized for mobile and desktop devices
-- **Real-Time Notifications**: Instant updates and notifications for tasks
-- **Data Visualization**: Interactive charts and graphs for data analysis
-- **Cross-Platform Compatibility**: Works seamlessly across all modern browsers
+- CRUD Operations for Company Data
+- Table Filtering & Search
+- Smart Table Sorting
+- Modal-Based Data Entry
+- Responsive UI
+- SQLite Database Integration
+- Activity Logging
+- Server-Side Rendering
 
 ## Technologies Used
 - **Frontend**: HTML, CSS, JavaScript
