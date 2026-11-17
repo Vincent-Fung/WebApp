@@ -1,0 +1,122 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": ""
+  },
+  "analysisStartTime": "2026-11-17T08:03:07.9931676Z",
+  "analysisEndTime": "2026-11-17T08:03:08.004166Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 1,
+      "issues": 1,
+      "incidents": 2,
+      "effort": 0
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 0,
+        "Optional": 0,
+        "Potential": 0,
+        "Information": 2
+      },
+      "category": {
+        "Pkg": 2
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "WebApplication\\WebApp.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "WebApp",
+        "projectKind": "AspNetCore",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "isTestProject": false,
+        "numberOfFiles": 20,
+        "numberOfCodeFiles": 15,
+        "linesTotal": 871,
+        "linesOfCode": 826,
+        "totalApiScanned": 0,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "2f967dd0-9622-472d-b6d8-4c91ec7747a9",
+          "ruleId": "Pkg.0001",
+          "description": "Project references \u0027Microsoft.EntityFrameworkCore.Sqlite\u0027 9.0.9; proposed upgrade to 9.0.23.",
+          "projectPath": "WebApplication\\WebApp.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.Sqlite, 9.0.9",
+              "protected": "Microsoft.EntityFrameworkCore.Sqlite, 9.0.9"
+            },
+            "kind": "File",
+            "path": "WebApplication\\WebApp.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.Sqlite, 9.0.9",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.Sqlite, 9.0.9",
+            "label": "Microsoft.EntityFrameworkCore.Sqlite 9.0.9",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore.Sqlite",
+              "PackageVersion": "9.0.9",
+              "PackageNewVersion": "9.0.23",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "5a0363ba-8995-4208-8a98-fc37149bcd51",
+          "ruleId": "Pkg.0001",
+          "description": "Project references \u0027Microsoft.EntityFrameworkCore.Tools\u0027 9.0.9; proposed upgrade to 10.0.15.",
+          "projectPath": "WebApplication\\WebApp.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.Tools, 9.0.9",
+              "protected": "Microsoft.EntityFrameworkCore.Tools, 9.0.9"
+            },
+            "kind": "File",
+            "path": "WebApplication\\WebApp.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.Tools, 9.0.9",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.Tools, 9.0.9",
+            "label": "Microsoft.EntityFrameworkCore.Tools 9.0.9",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore.Tools",
+              "PackageVersion": "9.0.9",
+              "PackageNewVersion": "10.0.15",
+              "PackageReplacements": null
+            }
+          }
+        }
+      ],
+      "features": []
+    }
+  ],
+  "rules": {
+    "Pkg.0001": {
+      "id": "Pkg.0001",
+      "isFeature": false,
+      "description": "Project references a package included in this upgrade.\n\nThe project references one of the packages being upgraded. This finding records the reference (current and proposed version) so the assessment lists every affected project even when no breaking API changes were detected.",
+      "label": "Project references an upgraded package",
+      "severity": "Information",
+      "effort": 0
+    }
+  }
+}

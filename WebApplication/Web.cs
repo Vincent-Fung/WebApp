@@ -29,7 +29,7 @@ namespace WebApp
             _logger = logger;
         }
 
-        public List<Company> Companies { get; set; }
+        public List<Company> Companies { get; set; } = new();
 
         public async Task OnGetAsync()
         {
@@ -37,7 +37,7 @@ namespace WebApp
         }
 
 
-        public string Message { get; set; }
+        public string Message { get; set; } = string.Empty;
 
 
         // ----------------------------
