@@ -10,10 +10,10 @@ namespace WebApp.Models
         public int ID { get; set; }
 
         [Required]
-        public string NAME { get; set; }
+        public string NAME { get; set; } = string.Empty;
 
         public int AGE { get; set; }
-        public string ADDRESS { get; set; }
+        public string ADDRESS { get; set; } = string.Empty;
         public int SALARY { get; set; }
     }
 }
